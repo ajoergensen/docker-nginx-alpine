@@ -1,6 +1,6 @@
-FROM alpine:3.9
+FROM alpine:3.10
 
-ENV NGINX_VERSION 1.17.0
+ENV NGINX_VERSION 1.17.1
 
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& CONFIG="\
@@ -114,7 +114,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& git clone --depth=1 https://github.com/openresty/headers-more-nginx-module /usr/src/ngx_headers_more \
 	&& tar -zxC /usr/src -f nginx.tar.gz \
 	&& cd /usr/src/nginx-$NGINX_VERSION \
-	&& curl -fSL https://raw.githubusercontent.com/kn007/patch/master/nginx.patch -o nginx.patch \
+	&& curl -fSL https://raw.githubusercontent.com/SchatzM/patch/master/nginx.patch -o nginx.patch \
         && curl -fSL https://raw.githubusercontent.com/kn007/patch/master/nginx_auto_using_PRIORITIZE_CHACHA.patch -o nginx_auto_using_PRIORITIZE_CHACHA.patch \
         && patch -p1 < nginx.patch \
         && patch -p1 < nginx_auto_using_PRIORITIZE_CHACHA.patch \
