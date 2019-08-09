@@ -115,9 +115,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& tar -zxC /usr/src -f nginx.tar.gz \
 	&& cd /usr/src/nginx-$NGINX_VERSION \
 	&& curl -fSL https://raw.githubusercontent.com/SchatzM/patch/master/nginx.patch -o nginx.patch \
-        && curl -fSL https://raw.githubusercontent.com/kn007/patch/master/nginx_auto_using_PRIORITIZE_CHACHA.patch -o nginx_auto_using_PRIORITIZE_CHACHA.patch \
         && patch -p1 < nginx.patch \
-        && patch -p1 < nginx_auto_using_PRIORITIZE_CHACHA.patch \
 	&& ./configure $CONFIG --with-debug \
 	&& make -j$(getconf _NPROCESSORS_ONLN) \
 	&& mv objs/nginx objs/nginx-debug \
